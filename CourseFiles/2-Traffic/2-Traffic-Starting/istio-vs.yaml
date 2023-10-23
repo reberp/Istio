@@ -1,0 +1,18 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: fleetman-staff-service
+  namespace: default # typically same NS as target service
+spec:
+  hosts:
+  - fleetman-staff-service # The service that rules are applied to
+  http:
+  - route:
+    - destination:
+        host: fleetman-staff-service # route to this service with this weight
+        subset: safe # matches name in DR that defined this group in this service   
+      weight: 90
+    - destination:
+        host: fleetman-staff-service
+        subset: risky
+      weight: 10

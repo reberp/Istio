@@ -1,0 +1,30 @@
+apiVersion: v1
+items:
+- apiVersion: networking.istio.io/v1beta1
+  kind: VirtualService
+  metadata:
+    creationTimestamp: "2023-10-23T15:45:25Z"
+    generation: 1
+    labels:
+      kiali_wizard: weighted_routing
+    name: fleetman-staff-service
+    namespace: default
+    resourceVersion: "6802"
+    uid: c6813a64-0097-4f81-9367-7652eb1f032b
+  spec:
+    hosts:
+    - fleetman-staff-service.default.svc.cluster.local
+    http:
+    - route:
+      - destination:
+          host: fleetman-staff-service.default.svc.cluster.local
+          subset: safe
+        weight: 90
+      - destination:
+          host: fleetman-staff-service.default.svc.cluster.local
+          subset: risky
+        weight: 10
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""

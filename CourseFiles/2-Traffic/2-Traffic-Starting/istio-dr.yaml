@@ -1,0 +1,14 @@
+apiVersion: networking.istio.io/v1beta1
+kind: DestinationRule # Defining which pods should be part of each VS subset 
+metadata:
+  name: fleetman-staff-service # anything
+  namespace: default
+spec:
+  host: fleetman-staff-service # what the subsets are pulled from
+  subsets:
+  - labels: # actually a pod selector 
+      version: safe # find pods with this label (in service?) 
+    name: safe # name that VS can use to match against 
+  - labels:
+      version: risky
+    name: risky
